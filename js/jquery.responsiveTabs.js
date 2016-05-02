@@ -346,7 +346,7 @@
             if(_this.getState() === 'accordion' && _this.options.scrollToAccordion && (!_this._isInView(oTab.accordionTab) || _this.options.animation !== 'default') && scrollOnLoad) {
 
                 // Add offset element's height to scroll position
-                scrollOffset = oTab.accordionTab.offset().top - _this.options.scrollToAccordionOffset;
+                scrollOffset = oTab.accordionTab.offset().top - ((typeof _this.options.scrollToAccordionOffset === 'function') ? _this.options.scrollToAccordionOffset() : _this.options.scrollToAccordionOffset);
 
                 // Check if the animation option is enabled, and if the duration isn't 0
                 if(_this.options.animation !== 'default' && _this.options.duration > 0) {
