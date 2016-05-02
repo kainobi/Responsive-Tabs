@@ -31,6 +31,10 @@
             anchor: 'r-tabs-anchor',
             panel: 'r-tabs-panel',
             accordionTitle: 'r-tabs-accordion-title'
+        },
+        selectors: {
+            nav: '.r-tabs-nav',
+            tab: '.r-tabs-tab'
         }
     };
 
@@ -138,7 +142,7 @@
      */
     ResponsiveTabs.prototype._loadElements = function() {
         var _this = this;
-        var $ul = this.$element.children('ul');
+        var $ul = this.$element.children(_this.options.selectors.nav);
         var tabs = [];
         var id = 0;
 
@@ -147,7 +151,7 @@
         $ul.addClass(_this.options.classes.ul); // List container
 
         // Get tab buttons and store their data in an array
-        $('li', $ul).each(function() {
+        $(_this.options.selectors.tab, $ul).each(function() {
             var $tab = $(this);
             var isExcluded = $tab.hasClass(_this.options.classes.stateExcluded);
             var $anchor, $panel, $accordionTab, $accordionAnchor, panelSelector;
@@ -279,7 +283,8 @@
      * @param {Event} e - The event that triggers the state change
      */
     ResponsiveTabs.prototype._setState = function(e) {
-        var $ul = $('ul', this.$element);
+        var _this = this;
+        var $ul = $(_this.options.selectors.nav, this.$element);
         var oldState = this.state;
         var startCollapsedIsState = (typeof this.options.startCollapsed === 'string');
         var startTab;
